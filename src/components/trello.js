@@ -124,7 +124,7 @@ editTasks(){
 }
 onDrop(e){
   let droppedListIndex = e.target.id.substring(e.target.id.indexOf('@')+ 1, e.target.id.length);
-  this.props.moveTask(this.state.draggedTask, droppedListIndex);
+  droppedListIndex !== "" ? this.props.moveTask(this.state.draggedTask, droppedListIndex): undefined;
 }
   render(){
   return (<div className="page-container">
