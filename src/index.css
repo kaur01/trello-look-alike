@@ -1,0 +1,106 @@
+* {
+ box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  width: 100%;
+  background: linear-gradient(to bottom right, purple, pink,orange);
+}
+
+
+.page-header {
+  width: 100%;
+  background-color: #ff6a80;
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border-radius: 20px ;
+  font-family: courier;
+  font-size: 15px;
+}
+
+.page-header button{
+  float: left;
+  margin-top: 15px;
+  margin-bottom:25px;
+  margin-left: 500px;
+  border-radius: 20px ;
+  background-color: white;
+  color: black;
+  border: 2px solid #232b2b;
+}
+
+
+.page-container {
+  width: 80%;
+  margin: 10px auto;
+  background-color: #232b2b/*white*/;
+  padding: 32px;
+}
+
+.all-lists{
+display: flex;
+flex-direction: row;
+flex: 1;
+flex-wrap: wrap;
+background-color: purple;
+border-radius: 20px ;
+}
+
+.one-list{
+  background-color: #f08080;
+  border-radius: 20px ;
+  margin: 20px;
+  padding: 10px;
+}
+
+.list-header{
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  flex-direction: row;
+  font-family: courier;
+}
+[draggable=true] {
+    cursor: move;
+}
+
+.list-header button{
+  margin-top: 15px;
+  margin-bottom:25px;
+  margin-left: 40px;
+  border-radius: 20px ;
+  background-color: white;
+  color: black;
+  border: 2px solid #232b2b;
+}
+
+.list-body {
+  background-color: 	#ed1556;
+  border-radius: 20px ;
+ text-align: center;
+ resize: both;
+}
+
+.list-body p{
+ color: black;
+ font-family: courier;
+ font-weight: bold;
+ font-size: 15px;
+ text-align: left;
+
+}
+
+.list-body button{
+  margin-top: 15px;
+  margin-bottom:25px;
+  margin-left: 40px;
+  border-radius: 20px ;
+  background-color: white;
+  color: black;
+  border: 2px solid #232b2b;
+}
