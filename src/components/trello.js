@@ -4,6 +4,8 @@ import {bindActionCreators} from 'redux';
 import Modal from 'react-modal';
 
 import { addlist,removelist,addtask,removetask,edittask,moveTask } from '../actions/index';
+import ListCard from './list-card';
+
 
 const customStyles = {
   content : {
@@ -119,8 +121,8 @@ editTasks(){
   var newTask =  this.state.edittaskname
   var newTaskDate = this.state.edittaskdate
   var newTaskDesc = this.state.edittaskdesc
-   this.props.edittask(list,task,newTask,newTaskDate,newTaskDesc);
-   this.setState({edittaskname: "",edittaskdate: "",edittaskdesc: "",editmodalIsOpen: false});
+  this.props.edittask(list,task,newTask,newTaskDate,newTaskDesc);
+  this.setState({edittaskname: "",edittaskdate: "",edittaskdesc: "",editmodalIsOpen: false});
 }
 onDrop(e){
   let droppedListIndex = e.target.id.substring(e.target.id.indexOf('@')+ 1, e.target.id.length);
@@ -135,24 +137,9 @@ onDrop(e){
             <div className = "all-lists">
             {this.props.lists.map((item,index1) => {
               return(
-                <div key={index1} className = "one-list" id={"list@"+index1} onDragOver={e => e.preventDefault()} onDrop={e=> this.onDrop(e)}>
-                <div className="list-header">
-                <h2>{item.listname}</h2>
-                <button onClick = {() => {this.removelists(item)}}>Remove</button>
-                <button onClick = {() => {this.openModal(item)}} > Add Task </button>
-                </div>
-                 {item.tasks.map((task,index2) => {
-                   return(
-                     <div key={index2} className="list-body" id={index1+"@"+index2} draggable={true} onDragStart= {e => this.setDraggedTask(e)} onDragOver={e => e.preventDefault()}>
-                     <p>Name - {task.taskname}</p>
-                      <p>Date - {task.taskdate}</p>
-                        <p>Description - {task.taskdesc}</p>
-
-                     <button onClick = {() => {this.removetasks(item,task)}}>Remove</button>
-                     <button onClick = {() => {this.openTaskModal(item,task)}}>Edit Task</button>
-                      </div>);
-                 })}
-                </div>
+                <ListCard listIndex = {index1} listItem={item}
+                onDropped = {(e) => this.onDropped(e)}  removelists = {(item) => this.removelists(item)}
+                openModal = {(item) => this.openModal(item)}/>
               )
             })}
             </div>
