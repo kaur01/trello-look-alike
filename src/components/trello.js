@@ -5,6 +5,8 @@ import Modal from 'react-modal';
 
 import { addlist,removelist,addtask,removetask,edittask,moveTask } from '../actions/index';
 import ListCard from './list-card';
+import TaskModal from './task-modal';
+import ListModal from './list-modal';
 
 
 const customStyles = {
@@ -137,58 +139,30 @@ onDrop(e){
             <div className = "all-lists">
             {this.props.lists.map((item,index1) => {
               return(
-                <ListCard listIndex = {index1} listItem={item}
+                <ListCard key = {index1}
+                listIndex = {index1} listItem={item}
                 onDropped = {(e) => this.onDropped(e)}  removelists = {(item) => this.removelists(item)}
-                openModal = {(item) => this.openModal(item)}/>
+                openModal = {(item) => this.openModal(item)}
+                setDraggedTask={(e) => this.setDraggedTask(e)}
+                removetasks={(listItem,task) => this.removetasks(listItem,task)}
+                openTaskModal={(listItem,task) => this.openTaskModal(listItem,task)}
+                onDrop = {(e) => this.onDrop(e)}/>
               )
             })}
             </div>
-            <Modal
-            isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
-            style={customStyles}>
-            <p>Please Enter Task Details Here</p>
-            <input placeholder = "Enter Task Name Here"
-            onChange = { (e) =>   this.setState({taskname: e.target.value})}/>
-            <input placeholder = "Enter Task Start Date Here"
-            onChange = { (e) =>   this.setState({taskdate: e.target.value})}/>
-            <input placeholder = "Enter Task Description Here"
-            onChange = { (e) =>   this.setState({taskdesc: e.target.value})}/>
-            <button onClick = {(e) => {this.addtasks()}}> Submit </button>
-            </Modal>
+            <TaskModal isOpen = {this.state.modalIsOpen} closeModal={()=> this.closeModal}
+            customStyles={customStyles} setTaskName = {(e) => this.setState({taskname: e.target.value})}
+            setTaskDate = {(e) => this.setState({taskdate: e.target.value})}
+            setTaskDesc = {(e) => this.setState({taskdesc: e.target.value})} addtasks = {(e) =>this.addtasks(e)} />
 
+            <ListModal isOpen = {this.state.listmodalIsOpen} closeModal={()=> this.closeListModal}
+            customStyles={customStyles} listname = {(e) => this.setState({listname: e.target.value})}
+            addlists = {(e) =>this.addlists(e)} />
 
-
-            <Modal
-            isOpen={this.state.listmodalIsOpen}
-            onRequestClose={this.closeListModal}
-            style={customStyles}>
-            <p>Please Enter List Name Here</p>
-            <input placeholder = "Enter List Name Here"
-            onChange = { (e) =>   this.setState({listname: e.target.value})}/>
-            <button onClick = {(e) => {this.addlists()}}> Submit </button>
-            </Modal>
-
-
-
-
-            <Modal
-            isOpen={this.state.editmodalIsOpen}
-            onRequestClose={this.closeTaskModal}
-            style={customStyles}>
-            <p>Please Enter Task Details Here</p>
-            <input placeholder = "Enter Task Name Here"
-            onChange = { (e) =>   this.setState({edittaskname: e.target.value})}
-            value = {this.state.edittaskname}/>
-            <input placeholder = "Enter Task Start Date Here"
-            onChange = { (e) =>   this.setState({edittaskdate: e.target.value})}
-            value = {this.state.edittaskdate}/>
-            <input placeholder = "Enter Task Description Here"
-            onChange = { (e) =>   this.setState({edittaskdesc: e.target.value})}
-            value = {this.state.edittaskdesc}/>
-            <button onClick = {(e) => {this.editTasks()}}> Submit </button>
-            </Modal>
-
+            <EditTaskModal isOpen={this.state.editmodalIsOpen} closeModal={()=> this.closeTaskModal}
+            customStyles={customStyles} edittaskname = {(e) =>   this.setState({edittaskname: e.target.value})}
+            edittaskdate = {(e) => this.setState({edittaskdate: e.target.value})}
+            edittaskdesc = {(e) => this.setState({edittaskdesc: e.target.value})} editTasks = {(e) => {this.editTasks(e)}}/>
         </div>);
       }
 }
