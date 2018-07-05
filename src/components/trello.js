@@ -7,6 +7,7 @@ import { addlist,removelist,addtask,removetask,edittask,moveTask } from '../acti
 import ListCard from './list-card';
 import TaskModal from './task-modal';
 import ListModal from './list-modal';
+import EditTaskModal from './edit-task-modal';
 
 
 const customStyles = {
@@ -153,16 +154,19 @@ onDrop(e){
             <TaskModal isOpen = {this.state.modalIsOpen} closeModal={()=> this.closeModal}
             customStyles={customStyles} setTaskName = {(e) => this.setState({taskname: e.target.value})}
             setTaskDate = {(e) => this.setState({taskdate: e.target.value})}
-            setTaskDesc = {(e) => this.setState({taskdesc: e.target.value})} addtasks = {(e) =>this.addtasks(e)} />
+            setTaskDesc = {(e) => this.setState({taskdesc: e.target.value})}
+            close = {(e) => this.setState({modalIsOpen:false})} addtasks = {(e) =>this.addtasks(e)} />
 
             <ListModal isOpen = {this.state.listmodalIsOpen} closeModal={()=> this.closeListModal}
             customStyles={customStyles} listname = {(e) => this.setState({listname: e.target.value})}
+            close = {(e) => this.setState({listmodalIsOpen:false})}
             addlists = {(e) =>this.addlists(e)} />
 
             <EditTaskModal isOpen={this.state.editmodalIsOpen} closeModal={()=> this.closeTaskModal}
             customStyles={customStyles} edittaskname = {(e) =>   this.setState({edittaskname: e.target.value})}
             edittaskdate = {(e) => this.setState({edittaskdate: e.target.value})}
-            edittaskdesc = {(e) => this.setState({edittaskdesc: e.target.value})} editTasks = {(e) => {this.editTasks(e)}}/>
+            edittaskdesc = {(e) => this.setState({edittaskdesc: e.target.value})} editTasks = {(e) => {this.editTasks(e)}}
+            close = {(e) => this.setState({editmodalIsOpen:false})}/>
         </div>);
       }
 }

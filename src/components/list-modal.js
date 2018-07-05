@@ -12,6 +12,7 @@ class ListModal extends Component{
           <input placeholder = "Enter List Name Here"
           onChange = { (e) =>   this.props.listname(e) }/>
           <button onClick = {(e) => {this.props.addlists(e)}}> Submit </button>
+          <button onClick = {(e) => {this.props.close(e)}}> Cancel </button>
           </Modal>
     );
   }

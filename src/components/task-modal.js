@@ -16,6 +16,7 @@ render(){
   <input placeholder = "Enter Task Description Here"
   onChange = { (e) =>   this.props.setTaskDesc(e)}/>
   <button onClick = {(e) => {this.props.addtasks(e)}}> Submit </button>
+  <button onClick = {(e) => {this.props.close(e)}}> Cancel </button>
   </Modal>);
 }
 }
