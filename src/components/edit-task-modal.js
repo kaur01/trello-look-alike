@@ -9,7 +9,8 @@ render(){
     style={this.props.customStyles}>
     <p>Please Enter Task Details Here</p>
     <input placeholder = "Enter Task Name Here"
-    onChange = { (e) =>   this.props.edittaskname(e)}/>
+    onChange = { (e) =>   this.props.edittaskname(e)}
+    value = {this.props.taskname}/>
     <input placeholder = "Enter Task Start Date Here"
     onChange = { (e) =>   this.props.edittaskdate(e)}/>
     <input placeholder = "Enter Task Description Here"

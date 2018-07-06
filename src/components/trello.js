@@ -79,9 +79,10 @@ class Trello extends Component{
 
   addlists(e){
     var listname = this.state.listname;
-    if (listname !== null && listname !== '' )
-    this.props.addlist(listname);
-    this.setState({listname:"",listmodalIsOpen:false});
+    if (listname !== '' ){
+      this.props.addlist(listname);
+      this.setState({listname:"",listmodalIsOpen:false});
+    }
   }
 
   removelists(item){
@@ -124,8 +125,11 @@ editTasks(){
   var newTask =  this.state.edittaskname
   var newTaskDate = this.state.edittaskdate
   var newTaskDesc = this.state.edittaskdesc
-  this.props.edittask(list,task,newTask,newTaskDate,newTaskDesc);
-  this.setState({edittaskname: "",edittaskdate: "",edittaskdesc: "",editmodalIsOpen: false});
+  if (this.state.taskname !== "" && this.state.taskdate !== "" && this.state.taskdesc !== ""){
+    this.props.edittask(list,task,newTask,newTaskDate,newTaskDesc);
+    this.setState({edittaskname: "",edittaskdate: "",edittaskdesc: "",editmodalIsOpen: false});
+  }
+
 }
 onDrop(e){
   let droppedListIndex = e.target.id.substring(e.target.id.indexOf('@')+ 1, e.target.id.length);
@@ -140,7 +144,7 @@ onDrop(e){
             <div className = "all-lists">
             {this.props.lists.map((item,index1) => {
               return(
-                <ListCard key = {index1}
+                <ListCard key = {index1} 
                 listIndex = {index1} listItem={item}
                 onDropped = {(e) => this.onDropped(e)}  removelists = {(item) => this.removelists(item)}
                 openModal = {(item) => this.openModal(item)}
@@ -155,7 +159,8 @@ onDrop(e){
             customStyles={customStyles} setTaskName = {(e) => this.setState({taskname: e.target.value})}
             setTaskDate = {(e) => this.setState({taskdate: e.target.value})}
             setTaskDesc = {(e) => this.setState({taskdesc: e.target.value})}
-            close = {(e) => this.setState({modalIsOpen:false})} addtasks = {(e) =>this.addtasks(e)} />
+            close = {(e) => this.setState({modalIsOpen:false})} addtasks = {(e) =>this.addtasks(e)}/>
+
 
             <ListModal isOpen = {this.state.listmodalIsOpen} closeModal={()=> this.closeListModal}
             customStyles={customStyles} listname = {(e) => this.setState({listname: e.target.value})}
@@ -163,7 +168,8 @@ onDrop(e){
             addlists = {(e) =>this.addlists(e)} />
 
             <EditTaskModal isOpen={this.state.editmodalIsOpen} closeModal={()=> this.closeTaskModal}
-            customStyles={customStyles} edittaskname = {(e) =>   this.setState({edittaskname: e.target.value})}
+            customStyles={customStyles} edittaskname = {(e) => this.setState({edittaskname: e.target.value})}
+            taskname = {this.state.taskname} //Tried to auto populate the modal fields!!
             edittaskdate = {(e) => this.setState({edittaskdate: e.target.value})}
             edittaskdesc = {(e) => this.setState({edittaskdesc: e.target.value})} editTasks = {(e) => {this.editTasks(e)}}
             close = {(e) => this.setState({editmodalIsOpen:false})}/>

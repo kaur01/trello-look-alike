@@ -53,9 +53,11 @@ border-radius: 20px ;
 
 .one-list{
   background-color: #f08080;
-  border-radius: 20px ;
+  border-radius: 10px ;
   margin: 20px;
   padding: 10px;
+  height: 200px;
+  overflow-y: scroll;
 }
 
 .list-header{
